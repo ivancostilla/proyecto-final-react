@@ -5,7 +5,6 @@ import ButtonComponent from './components/button';
 const App = ()=>{
     return (
         <>
-            <body>
                 <header>
                 <NavBar/>
                 </header>
@@ -20,7 +19,6 @@ const App = ()=>{
                 <footer>
 
                 </footer>
-            </body>
         </>
     )
 }

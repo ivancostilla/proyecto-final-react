@@ -1,6 +1,6 @@
 import './App.css';
-import NavBar from './components/navbar';
-import ButtonComponent from './components/button';
+import NavBar from './components/NavBar';
+import ButtonComponent from './components/Button';
 
 const App = ()=>{
     return (

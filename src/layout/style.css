@@ -1,0 +1,7 @@
+.ItemListContainer .a{
+cursor: pointer;
+font-size: 3rem;
+}
+.ItemListContainer .a:hover{
+    color: #0b7052;
+}

@@ -24,19 +24,28 @@ return () => {}
     //funcion que aumenta la cantidad:
     const onAdd = (stock)=> {
         if (contador < stock){
-setContador(contador + 1);
-        }
-    }
+            setContador(contador + 1);
+        };
+    };
+    //funion qu isminuy la cantidad
     const onRemove= ()=>{
         if(contador > 1){
-        setContador(contador - 1)
+            setContador(contador - 1)
+        };
+    };
+    //alrta que aparce al hacer click en el boton 'agregar al carrito'
+    const alerta =()=>{
+        if(contador > 1){
+            alert(`agregaste ${contador} unidades del producto`);
+        } else{
+            alert(`agregaste ${contador} unidad del producto`);
         }
-    }
+    };
     return (
         <>
         <div className='ItemListContainer'>
             {/*  paso por props la funcion onAdd, y el hook tmb lo paso como props*/}
-            <ItemCount stock={12} onAdd={onAdd} onRemove={onRemove} contador={contador}/>
+            <ItemCount stock={12} onAdd={onAdd} onRemove={onRemove} contador={contador} alerta={alerta}/>
         </div>
         </>
     )

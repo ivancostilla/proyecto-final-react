@@ -1,7 +1,7 @@
 import './style.css';
 
 //hay que aplicar esto luego en las cards
-const ItemCount = ({stock,onAdd,contador,onRemove}) => {
+const ItemCount = ({stock,onAdd,contador,onRemove,alerta}) => {
     return (
         <>
         <button onClick={onRemove}>-</button>
@@ -9,7 +9,10 @@ const ItemCount = ({stock,onAdd,contador,onRemove}) => {
         {/* para poder pasar parametros tengo que hacer un arrow  function */}
         <button onClick={()=>{onAdd(stock)}}>+</button>
         <div>
-            <button>Comprar</button>
+            <p>Stock disponible: <b>{stock}</b>u</p>
+        </div>
+        <div>
+            <button onClick={()=>{alerta()}}>Agregar al carrito</button>
         </div>
         </>
     )

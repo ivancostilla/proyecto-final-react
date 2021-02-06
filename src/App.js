@@ -1,6 +1,6 @@
 import './App.css';
 import NavBar from './components/NavBar';
-import ButtonComponent from './components/Button';
+// import ButtonComponent from './components/Button';
 import ItemListContainer from "./layout/ItemListContainer";
 //parametro es un valor que se le pasa a una funcion
 //un callback es una funcion que se ejecuta cuando algo pasó,
@@ -27,9 +27,9 @@ const App = ()=>{
                     <section>
                        <article>
                        <h1>Titulo</h1>
-                       <ButtonComponent text={`Click aqui`}>
+{/*                        <ButtonComponent text={`Click aqui`}>
                        <div>Hola</div>
-                       </ButtonComponent>
+                       </ButtonComponent> */}
                        <ItemListContainer/>
                        </article>
                     </section>

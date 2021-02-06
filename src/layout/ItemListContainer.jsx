@@ -1,12 +1,12 @@
 import React,{useEffect,useState} from 'react';
 import './style.css';
-import ItemCount from '../components/ItemCount';
-
+import ItemList from '../components/ItemList';
+import productList from '../mocks/productList';
 const ItemListContainer = ()=>{
 /* https://api.mercadolibre.com/products/search?status=active&site_id=MLA&q=Samsung&limit=5000
  */
 /* consumiendo apis clase 7: */
-useEffect(()=>{
+/* useEffect(()=>{
 fetch("https://api.mercadolibre.com/products/search?status=active&site_id=MLA&q=Samsung&limit=5000")
 .then(result => {
     return result.json()
@@ -17,35 +17,40 @@ fetch("https://api.mercadolibre.com/products/search?status=active&site_id=MLA&q=
     console.log(error);
 })
 return () => {}
-},[])
-//hooks:
-    const [contador, setContador] = useState(1);
+},[]) */
+/* fin clase 7 */
 
-    //funcion que aumenta la cantidad:
-    const onAdd = (stock)=> {
-        if (contador < stock){
-            setContador(contador + 1);
-        };
-    };
-    //funion qu isminuy la cantidad
-    const onRemove= ()=>{
-        if(contador > 1){
-            setContador(contador - 1)
-        };
-    };
-    //alrta que aparce al hacer click en el boton 'agregar al carrito'
-    const alerta =()=>{
-        if(contador > 1){
-            alert(`agregaste ${contador} unidades del producto`);
-        } else{
-            alert(`agregaste ${contador} unidad del producto`);
-        }
-    };
+/* loading */
+const [loading, setLoading] = useState(false)
+
+
+/* useState: lo uso para guardar los productos traidos con useEffect */
+const [products, setProducts] = useState([])
+
+/* simulo pedido a una api: */
+useEffect(() => {
+    /* antes de que cargen los productos coloco un loading: */
+    setLoading(true);
+    /* esta promesa trae los productos: */
+    const Promesa = new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve(productList);
+        },2000);
+    });
+    Promesa.then((result)=>{
+        /* aqui se usa la funcion q me da useState, para guardar los datos traidos */
+        setProducts(result);
+        /* cuando se terminan de cargar los productos, borramos el loading: */
+        setLoading(false);
+    });
+},[]);
+/* cuando la funcion del loading es verdadera mostramos ste msj: */
+if(loading){return <h1>Cargando productos...</h1>}
+
     return (
         <>
         <div className='ItemListContainer'>
-            {/*  paso por props la funcion onAdd, y el hook tmb lo paso como props*/}
-            <ItemCount stock={12} onAdd={onAdd} onRemove={onRemove} contador={contador} alerta={alerta}/>
+            <ItemList products={products}/>
         </div>
         </>
     )

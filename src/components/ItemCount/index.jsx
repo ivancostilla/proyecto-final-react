@@ -4,7 +4,7 @@ import './style.css';
 const ItemCount = ({stock,onAdd,contador,onRemove,alerta}) => {
     return (
         <>
-        <button onClick={onRemove}>-</button>
+        <button onClick={()=>{onRemove()}}>-</button>
         <b>{contador}</b>
         {/* para poder pasar parametros tengo que hacer un arrow  function */}
         <button onClick={()=>{onAdd(stock)}}>+</button>

@@ -14,11 +14,6 @@ const ItemList = ({products}) => {
             })}
             </ul>
         </div>
-{/*         <div>
-        <Item/>
-        <Item/>
-        <Item/>
-        </div> */}
         </>
     );
 };

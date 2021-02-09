@@ -17,3 +17,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     }
+.style-none {
+    text-decoration: none;
+    color: #108568;
+}

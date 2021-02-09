@@ -22,8 +22,6 @@ return () => {}
 
 /* loading */
 const [loading, setLoading] = useState(false)
-
-
 /* useState: lo uso para guardar los productos traidos con useEffect */
 const [products, setProducts] = useState([])
 

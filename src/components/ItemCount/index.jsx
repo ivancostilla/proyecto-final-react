@@ -1,30 +1,7 @@
 import './style.css';
-import React,{useState} from 'react';
 
-const ItemCount = ({stock}) => {
+const ItemCount = ({stock,onAdd,onRemove,alerta,contador }) => {
 
-    //hooks:
-const [contador, setContador] = useState(1);
-    //funcion que aumenta la cantidad:
-const onAdd = (stock)=> {
-    if (contador < stock){
-        setContador(contador + 1);
-    };
-};
-//funion que disminuye la cantidad
-const onRemove= ()=>{
-    if(contador > 1){
-        setContador(contador - 1)
-    };
-};
-//alrta que aparce al hacer click en el boton 'agregar al carrito'
-const alerta =()=>{
-    if(contador > 1){
-        alert(`agregaste ${contador} unidades del producto`);
-    } else{
-        alert(`agregaste ${contador} unidad del producto`);
-    }
-};
     return (
         <>
         <button onClick={()=>{onRemove()}}>-</button>

@@ -1,3 +1,5 @@
+Por ahora solo me enfoqué en aplicar lo aprendido en clases, aun no decidí que tipo de ecommerce quiero hacer para el proyecto final, pero si tengo unas cuantas ideas de lo que quiero aplicar dentro del proyecto.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

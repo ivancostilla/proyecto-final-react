@@ -7,11 +7,14 @@ const ItemList = ({products}) => {
         <>
         <div>
             <ul className='itemList'>
-          {products.map((product)=>{
-              return (
-                        <Item key={product.id} product={product}/>
-                )
-            })}
+                {/* descubri que esto asigna la key automaticamente: */}
+            {React.Children.toArray(
+                products.map((product)=>{
+                    return (
+                        <Item product={product} id={product.id}/>
+                    )
+                })
+            )}
             </ul>
         </div>
         </>

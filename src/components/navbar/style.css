@@ -21,6 +21,11 @@
 .a{
     color: #108568;
 text-decoration: none;
+transition: all .2s;
+}
+.a:hover{
+  background-color: #5c8077;
+    color: #333;
 }
 .products{
     position: relative;
@@ -70,8 +75,17 @@ margin-top: 10px;
     text-decoration: none;
 border-style: none;
 }
-button:focus + .products-ul {
+/* .no{opacity:0;} */
+.products-ul {
     opacity: 1;
     pointer-events: all;
-    transform: translateY(0px);
+    transform: translateY(0);
   }
+.active{
+  background-color: #5c8077;
+  color: #333;
+}
+.activehome{
+  background-color: #333;
+  color:#108568;
+}

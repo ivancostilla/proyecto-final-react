@@ -1,32 +1,19 @@
-import React,{useState} from 'react';
+import React,{ useState } from 'react';
+import {Link} from 'react-router-dom';
 import ItemCount from '../ItemCount';
 import './style.css';
 
 const ItemDetail = ({product}) => {   
-          //hooks:
-          const [contador, setContador] = useState(1);
-
-          //funcion que aumenta la cantidad:
-              const onAdd = (stock)=> {
-                  if (contador < stock){
-                     setContador(contador + 1);
-                  };
-              };
-              //funion que disminuye la cantidad
-              const onRemove= ()=>{
-                  if(contador > 1){
-                      setContador(contador - 1)
-                  };
-                  };
-                  //alrta que aparce al hacer click en el boton 'agregar al carrito'
-              const alerta =()=>{
-                  if(contador > 1){
-                      alert(`agregaste ${contador} unidades del producto`);
-                  } else{
-                      alert(`agregaste ${contador} unidad del producto`);
-                  }
-                  }; 
-  
+    const [irAlCarrito,setIrAlCarrito] = useState(false)
+    //alrta que aparce al hacer click en el boton 'agregar al carrito'
+    const onAdd =(contador)=>{
+        if(contador > 1){
+            alert(`agregaste ${contador} unidades del producto`);
+        } else{
+            alert(`agregaste ${contador} unidad del producto`);
+        }
+        setIrAlCarrito(true)
+        }; 
 return (
     <>
          <div>
@@ -42,7 +29,7 @@ return (
                         <p>Diseño de la tela: {product.tela}</p>
                         <p>Marca: {product.marca}</p>
                         <p>Modelo: {product.modelo}</p>
-                        <ItemCount stock={product.stock} contador={contador} onAdd={onAdd} onRemove={onRemove} alerta={alerta}/>
+                        {irAlCarrito ? <Link to='/carrito'>Treminar mi compra</Link> : <ItemCount stock={product.stock} onAdd={onAdd}/>}
                     </div>
             </ul>
         </div>

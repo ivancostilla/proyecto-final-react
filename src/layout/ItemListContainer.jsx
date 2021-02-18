@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React,{ useEffect, useState} from 'react';
 import './style.css';
 import ItemList from '../components/ItemList';
 import productList from '../mocks/productList';
@@ -28,9 +28,7 @@ return () => {}
 const [loading, setLoading] = useState(false)
 /* useState: lo uso para guardar los productos traidos con useEffect */
 const [products, setProducts] = useState([])
-
 const {id} = useParams()
-
 
 /* simulo pedido a una api: */
 useEffect(() => {
@@ -48,7 +46,7 @@ useEffect(() => {
                 setProducts(result.filter(product=>product.category===id))
             }else{
                 setProducts(result)
-            };
+            }
         })
         .catch(reject=>{
             console.log(reject)

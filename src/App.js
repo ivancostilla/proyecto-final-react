@@ -6,6 +6,9 @@ import ItemListContainer from "./layout/ItemListContainer";
 import ItemDetailContainer from "./layout/ItemDetailContainer";
 import CartContainer from './layout/CartContainer';
 import ProductNav from './components/ProductNav';
+import { CartProvider } from './context/CartContext';
+import ItemListContainerHome from './layout/ItemListContainerHome';
+
 //parametro es un valor que se le pasa a una funcion
 //un callback es una funcion que se ejecuta cuando algo pasó,
 //es un evento que ejecuta el componente y le evuelve el valor al padre
@@ -23,28 +26,32 @@ y contienen a muchos contenedores hijos, que son de presentacion */
 
 const App = ()=>{
     return (
-    <BrowserRouter>
-        <header>
-            <NavBar/>
-        </header>
-        <main>
-            <section>
-                <article>
-                    <Switch>
-                        <Route exact path='/'>
-                            <ItemListContainer/>
-                        </Route>
-                        <Route exact path='/category'>
-                            <ProductNav/>
-                            <ItemListContainer/>
-                        </Route>
-                        <Route exact path='/category/:id'>
-                            <ProductNav/>
-                            <ItemListContainer/>
-                        </Route>
-                        <Route exact path="/item/:id">
-                            <ItemDetailContainer/>
-                        </Route>
+    <CartProvider>
+        <BrowserRouter>
+            <header>
+                <NavBar/>
+            </header>
+            <main>
+                <section>
+                    <article>
+                        <Switch>
+                            <Route exact path='/'>
+                                <ItemListContainerHome/>
+                            </Route>
+                            <Route exact path='/category'>
+                                <ProductNav/>
+                                <ItemListContainerHome/>
+                            </Route>
+                            <Route exact path='/category/:id'>
+                                <ProductNav/>
+                                <ItemListContainer/>
+                            </Route>
+                            <Route exact path="/item/:id">
+                                <ItemDetailContainer/>
+                            </Route>
+                            <Route exact path='/carrito'>
+                                <CartContainer/>
+                            </Route>
                         {/*
                         {/* <Route exact path='/boton'>
                             <h1>Titulo</h1>
@@ -55,16 +62,14 @@ const App = ()=>{
                     {/* para error 404: */}
                       {/*   <Route path="*" children={<div>Not found</div>}>
                             </Route>}*/}
-                        <Route exact path='/carrito'>
-                            <CartContainer/>
-                        </Route>
-                    </Switch>
-                </article>
-            </section>
-        </main> 
-        <footer>
-        </footer>
-    </BrowserRouter>
+                        </Switch>
+                    </article>
+                </section>
+            </main> 
+            <footer>
+            </footer>
+        </BrowserRouter>
+    </CartProvider>
     )
 }
 

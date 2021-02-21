@@ -17,9 +17,9 @@ const ItemCount = ({stock,onAdd}) => {
             setContador(contador - 1)
         };
     };
-    const onAddwrap = ()=>{
+   /*  const onAddwrap = ()=>{
         onAdd(contador);
-    };
+    }; */
 
     return (
         <>
@@ -31,7 +31,7 @@ const ItemCount = ({stock,onAdd}) => {
         {/* para poder pasar parametros tengo que hacer un arrow  function */}
         <button onClick={()=>{incrementar(stock)}}>+</button>
         <div>
-            <button onClick={onAddwrap}>Agregar al carrito</button>
+            <button onClick={(e) => onAdd(e, contador)}>Agregar al carrito</button>
         </div>
         </>
     )

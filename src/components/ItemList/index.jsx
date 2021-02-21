@@ -1,12 +1,8 @@
-import React,{useContext} from 'react';
+import React from 'react';
 import Item from '../Item';
 import './style.css';
-import { CartContext } from '../../context/CartContext';
 
 const ItemList = ({products}) => {
-    /* context: */
-    const {cart,setCart} = useContext(CartContext)
-    console.log(cart)
     return (
         <>
         <div>
@@ -20,7 +16,6 @@ const ItemList = ({products}) => {
                 })
             )}
             </ul>
-            <button onClick={() => { setCart([...cart, {items:{ id: 2323, name: 'toto' }, quantity:2}]) }}>agregar un producto</button>
         </div>
         </>
     );

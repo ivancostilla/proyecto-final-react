@@ -1,16 +1,26 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import {Link} from 'react-router-dom';
+import {useCartContext} from '../../context/CartContext';
 import './style.css';
 import ItemCount from '../ItemCount';
 
 const Item = ({product,id}) => {
-        const onAdd =(contador)=>{
-        if(contador > 1){
-            alert(`agregaste ${contador} unidades del producto`);
-        } else{
-            alert(`agregaste ${contador} unidad del producto`);
-        }
-        };
+
+    const {addToCart} = useCartContext();
+    const [showCounter, setShowCounter] = useState(true);
+    const handleAddProduct = (e, cantidad) => {
+        e.stopPropagation();
+        addToCart({
+            /* el objeto es el primer parametro item, el segundo parametro es la cantidad */
+            cantidad: cantidad,
+            product,
+        }, cantidad)
+
+        /* una vez apretado el boton "agregar al carrito, uso el state para ponerlo en false
+        y asi muestro el boton que lleva al carrito" */
+        setShowCounter(false);
+    }
+    
     return (
         <div className='card'>
                 <img src={`../${product.image}`} alt={product.description}></img>
@@ -18,8 +28,9 @@ const Item = ({product,id}) => {
                 <p>{product.description}</p>
                 <p>precio: ${product.price}</p>
                 <Link to={`/item/${id}`} className='detalle'>Ver Detalle</Link>
-                {/*  paso por props la funcion onAdd, y el hook tmb lo paso como props*/}
-                <ItemCount stock={product.stock} onAdd={onAdd}/>
+                {
+                    showCounter === true ? <ItemCount stock={product.stock} onAdd={handleAddProduct}/> : <Link to="/carrito">Terminar compra</Link>
+                }
             </div>
     );
 };

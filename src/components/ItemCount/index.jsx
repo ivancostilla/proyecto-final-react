@@ -2,24 +2,24 @@ import React,{useState} from 'react';
 import './style.css';
 
 const ItemCount = ({stock,onAdd}) => {
+    /* firebase.auth().createUserWithEmailAndPassword(email, password)
+ */
+
     //hooks:
     const [contador, setContador] = useState(1);
 
     //funcion que aumenta la cantidad:
-    const incrementar = (stock)=> {
-        if (contador < stock){
+    const incrementar = (stoc)=> {
+        if (contador < stoc){
             setContador(contador + 1);
-        };
+        }
     };
     //funcion que disminuye la cantidad
     const decrementar= ()=>{
         if(contador > 1){
             setContador(contador - 1)
-        };
+        }
     };
-   /*  const onAddwrap = ()=>{
-        onAdd(contador);
-    }; */
 
     return (
         <>

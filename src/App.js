@@ -7,7 +7,6 @@ import ItemDetailContainer from "./layout/ItemDetailContainer";
 import CartContainer from './layout/CartContainer';
 import ProductNav from './components/ProductNav';
 import { CartProvider } from './context/CartContext';
-import ItemListContainerHome from './layout/ItemListContainerHome';
 
 //parametro es un valor que se le pasa a una funcion
 //un callback es una funcion que se ejecuta cuando algo pasó,
@@ -36,11 +35,11 @@ const App = ()=>{
                     <article>
                         <Switch>
                             <Route exact path='/'>
-                                <ItemListContainerHome/>
+                                <ItemListContainer/>
                             </Route>
                             <Route exact path='/category'>
                                 <ProductNav/>
-                                <ItemListContainerHome/>
+                                <ItemListContainer/>
                             </Route>
                             <Route exact path='/category/:id'>
                                 <ProductNav/>

@@ -1,9 +1,11 @@
 import React,{useState} from 'react';
 import './style.css';
+import {useCartContext} from '../../context/CartContext';
 
 const ItemCount = ({stock,onAdd}) => {
     /* firebase.auth().createUserWithEmailAndPassword(email, password)
  */
+const {cart} = useCartContext();
 
     //hooks:
     const [contador, setContador] = useState(1);
@@ -31,7 +33,11 @@ const ItemCount = ({stock,onAdd}) => {
         {/* para poder pasar parametros tengo que hacer un arrow  function */}
         <button onClick={()=>{incrementar(stock)}}>+</button>
         <div>
-            <button onClick={(e) => onAdd(e, contador)}>Agregar al carrito</button>
+            <button onClick={(e) => {
+        // localStorage.setItem('carrito', JSON.stringify([...cart]));
+       onAdd(e, contador)
+            }}>Agregar al carrito</button>
+            
         </div>
         </>
     )

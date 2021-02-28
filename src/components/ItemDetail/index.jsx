@@ -19,6 +19,7 @@ const ItemDetail = ({product}) => {
         /* una vez apretado el boton "agregar al carrito, uso el state para ponerlo en false
         y asi muestro el boton que lleva al carrito" */
         setShowCounter(false);
+
     }
     
 return (

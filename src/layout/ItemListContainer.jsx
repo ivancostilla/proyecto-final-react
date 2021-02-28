@@ -4,7 +4,7 @@ import ItemList from '../components/ItemList';
 import productList from '../mocks/productList';
 import { useParams } from 'react-router-dom';
 
-
+/* todo: agregar localstorage y reactmemo */
 const ItemListContainer = ()=>{
 /* https://api.mercadolibre.com/products/search?status=active&site_id=MLA&q=Samsung&limit=5000
  */
@@ -28,6 +28,11 @@ return () => {}
 const [loading, setLoading] = useState(false)
 /* useState: lo uso para guardar los productos traidos con useEffect */
 const [products, setProducts] = useState([])
+const [remera,setRemera] =useState([])
+const [pantalon,setPantalon] =useState([])
+const [zapatillas,setZapatillas] =useState([])
+const [gorra,setGorra] =useState([])
+const [ruta,setRuta]= useState(true)
 const {id} = useParams()
 
 /* simulo pedido a una api: */
@@ -44,8 +49,14 @@ useEffect(() => {
            setLoading(false);
             if(id){
                 setProducts(result.filter(product=>product.category===id))
+                setRuta(true)
             }else{
-                setProducts(result)
+                setRuta(false)
+                setProducts(result);
+                setRemera(result.filter(product=>product.category === "001"))
+                setPantalon(result.filter(product=>product.category === "002"))
+                setZapatillas(result.filter(product=>product.category === "003"))
+                setGorra(result.filter(product=>product.category === "005")) 
             }
         })
         .catch(reject=>{
@@ -57,9 +68,24 @@ if(loading){return <h1 className='h1'>Cargando productos...</h1>}
 
     return (
         <>
-            <div className='ItemListContainer'>
+          { ruta === true ? <div className='ItemListContainer'>
+                <h2>Productos</h2>
                 <ItemList products={products}/>
-            </div>
+            </div> : 
+            <div className='ItemListContainer'>
+                    <h2>Productos</h2>
+                    <h2>Remeras: </h2>
+                    <ItemList products={remera}/>
+                    <h1>------------------------------</h1>
+                    <h2>Pantalones:</h2>
+                    <ItemList products={pantalon}/>
+                    <h1>------------------------------</h1>
+                    <h2>Zapatillas:</h2>
+                    <ItemList products={zapatillas}/>
+                    <h1>------------------------------</h1>
+                    <h2>Gorras:</h2>
+                    <ItemList products={gorra}/> 
+                </div>}
         </>
     )
 };

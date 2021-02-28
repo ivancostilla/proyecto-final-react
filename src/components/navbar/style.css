@@ -54,15 +54,7 @@ margin-top: 10px;
   align-items: center;
   text-align: center;
 } 
-  
- /*  .dropdown {
-    height: 10vh;
-    width: 60%;
-    margin: auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  } */
+
 .products button{
   background: none;
   text-decoration: none;

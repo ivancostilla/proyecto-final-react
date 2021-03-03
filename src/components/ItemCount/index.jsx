@@ -1,11 +1,11 @@
 import React,{useState} from 'react';
 import './style.css';
-import {useCartContext} from '../../context/CartContext';
+// import {useCartContext} from '../../context/CartContext';
 
 const ItemCount = ({stock,onAdd}) => {
     /* firebase.auth().createUserWithEmailAndPassword(email, password)
  */
-const {cart} = useCartContext();
+// const {cart} = useCartContext();
 
     //hooks:
     const [contador, setContador] = useState(1);

@@ -8,9 +8,9 @@ function ProductNav() {
             <ul className='ulp'>
                 <li><NavLink activeClassName='activehomep' className="a" to="/category">Todos los productos</NavLink></li>
                 <li><NavLink activeClassName='active' className="a" to="/category/remeras">Remeras</NavLink></li>
-                <li><NavLink activeClassName='active' className="a" to="/category/002">Pantalones</NavLink></li>
+                <li><NavLink activeClassName='active' className="a" to="/category/pantalones">Pantalones</NavLink></li>
                 <li><NavLink activeClassName='active' className="a" to="/category/zapatillas">Zapatillas</NavLink></li>
-                <li><NavLink activeClassName='active' className="a" to="/category/005">Gorras</NavLink></li>
+                <li><NavLink activeClassName='active' className="a" to="/category/gorras">Gorras</NavLink></li>
             </ul>
         </div>
     )

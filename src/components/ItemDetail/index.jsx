@@ -5,7 +5,6 @@ import {useCartContext} from '../../context/CartContext';
 import './style.css';
 
 const ItemDetail = ({product}) => {   
-console.log("🚀 ~ file: index.jsx ~ line 8 ~ ItemDetail ~ product", product)
 
     const {addToCart} = useCartContext();
     const [showCounter, setShowCounter] = useState(true);

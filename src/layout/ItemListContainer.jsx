@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import ItemList from "../components/ItemList";
-// import productList from "../mocks/productList";
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../firebase";
 /* todo: agregar localstorage y reactmemo */
@@ -24,64 +23,51 @@ return () => {}
   /* fin clase 7 */
 
   /* loading */
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   /* useState: lo uso para guardar los productos traidos con useEffect */
-  // const [products, setProducts] = useState([]);
-
-  /* hook de prueba para firebase */
   const [productos, setProductos] = useState([]);
 
   /* estados para separar los items por categorias */
-  // const [remera, setRemera] = useState([]);
-  // const [pantalon, setPantalon] = useState([]);
-  // const [zapatillas, setZapatillas] = useState([]);
-  // const [gorra, setGorra] = useState([]);
+  const [remera, setRemera] = useState([]);
+  const [pantalon, setPantalon] = useState([]);
+  const [zapatillas, setZapatillas] = useState([]);
+  const [gorra, setGorra] = useState([]);
   // /* estado para mostrar los items ordenados en la home, o dividirlos por categorias:*/
-  // const [ruta, setRuta] = useState(true);
+  const [ruta, setRuta] = useState(true);
   const { id } = useParams();
 
   /* simulo pedido a una api: */
   useEffect(() => {
     /* antes de que cargen los productos coloco un loading: */
-    setLoading(false);
-    // setRuta(true);
-    /* esta promesa trae los productos: */
-    // let promesa = new Promise((resolve, reject) => {
-    //   setTimeout(() => {
-    //     resolve(productList);
-    //   }, 2000);
-    // });
-    // promesa
-    //   .then((result) => {
-    //     setLoading(false);
-    //     if (id) {
-    //       setProducts(result.filter((product) => product.category === id));
-    //       setRuta(true);
-    //     } else {
-    //       setRuta(false);
-    //       setProducts(result);
-    //       setRemera(result.filter((product) => product.category === "001"));
-    //       setPantalon(result.filter((product) => product.category === "002"));
-    //       setZapatillas(result.filter((product) => product.category === "003"));
-    //       setGorra(result.filter((product) => product.category === "005"));
-    //     }
-    //   })
-    //   .catch((reject) => {
-    //     console.log(reject);
-    //   });
+    setLoading(true);
+
     // conexion a la bd
     const baseDeDatos = getFirestore(); // Guardamos la referencia de la coleccion que queremos tomar
     const itemCollection = baseDeDatos.collection("Items"); // Tomando los datos
     itemCollection.get().then(async (value) => {
-      let aux = await Promise.all(value.docs.map( async (element) => {
-        // llamar otra vez a la bd tomando la categoriaID del element
-        const CategoriasCollection = baseDeDatos.collection("Categorias");
-        let auxCategorias = await CategoriasCollection.doc(element.data().categoryID).get();
-        return { ...element.data(), categoria: auxCategorias.data().nombre };
-      }));
-      setProductos(aux);
+      let aux = await Promise.all(
+        value.docs.map(async (element) => {
+          // llamar otra vez a la bd tomando la categoriaID del element
+          const CategoriasCollection = baseDeDatos.collection("Categorias");
+          let auxCategorias = await CategoriasCollection.doc(element.data().categoryID).get();
+          return { ...element.data(), categoria: auxCategorias.data().nombre };
+        })
+      );
+      setLoading(false);
+      if (id) {
+        setProductos(aux.filter((product) => product.categoria === id));
+        setRuta(true);
+      } else {
+        setRuta(false);
+        setProductos(aux);
+        setRemera(aux.filter((product) => product.categoria === "remeras"));
+        setPantalon(aux.filter((product) => product.categoria === "pantalones"));
+        setZapatillas(aux.filter((product) => product.categoria === "zapatillas"));
+        setGorra(aux.filter((product) => product.categoria === "gorras"));
+    }
     });
   }, [id]);
+
   /* cuando la funcion del loading es verdadera mostramos ste msj: */
   if (loading) {
     return <h1 className="h1">Cargando productos...</h1>;
@@ -89,10 +75,27 @@ return () => {}
 
   return (
     <>
-      <div className="ItemListContainer">
-        <h2>Productos</h2>
-        <ItemList products={productos} />
-      </div>
+      {ruta === true ? (
+        <div className="ItemListContainer">
+          <h2>Productos</h2>
+          <ItemList products={productos} />
+        </div>
+      ) : (
+        <div className="ItemListContainer">
+          <h2>Productos</h2>
+          <h2>Remeras: </h2>
+          <ItemList products={remera} />
+          <p>------------------------------</p>
+          <h2>Pantalones:</h2>
+          <ItemList products={pantalon} />
+          <p>------------------------------</p>
+          <h2>Zapatillas:</h2>
+          <ItemList products={zapatillas} />
+          <p>------------------------------</p>
+          <h2>Gorras:</h2>
+          <ItemList products={gorra} />
+        </div>
+      )}
     </>
   );
 };

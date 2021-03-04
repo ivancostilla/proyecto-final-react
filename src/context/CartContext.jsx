@@ -1,30 +1,10 @@
-import { useContext, useState, createContext,useEffect } from "react";
-import { getFirestore } from "../firebase";
+import { useContext, useState, createContext} from "react";
 
 export const CartContext = createContext();
 export const useCartContext = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-    const [productos, setProductos] = useState([]);
-    useEffect(() => {
-        // /* llamada a base de datos */
-        const db = getFirestore(); /* conexion a bd */
-        const itemCollection = db.collection("Items"); /* guardamos la referencia de la coleccion */
-        // Tomando los datos
-        itemCollection.get().then((value) => {
-          let aux = value.docs.map(async (product) => {
-            // llamar otra vez a la bd tomando la categoriaID del element
-            const CategoriasCollection = db.collection("Categorias");
-            let auxCategorias = await CategoriasCollection.doc(product.data().categoryID).get();
-            return { ...product.data(), categoria: auxCategorias.data() };
-          });
-          setProductos(aux);
-        });
-        /* const baseDeDatos = getFirestore(); 
-     listaDeItems.map((u, i) => { baseDeDatos.collection("items").add(u)}) */
-     
-     }, [])
-     console.log(productos)
+  
   /* estado para ir guardando los productos que se agregan al carrito: */
   const [cart, setCart] = useState([]);
   /* estado para guardar la cantidad de elementos agregados eal carrito:*/

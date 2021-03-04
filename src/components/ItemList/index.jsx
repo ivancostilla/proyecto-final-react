@@ -3,7 +3,6 @@ import Item from '../Item';
 import './style.css';
 
 const ItemList = ({products}) => {
-console.log("🚀 ~ file: index.jsx -~ line 6 ~ ItemList ~ products", products)
     return (
         <>
         <div>

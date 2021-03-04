@@ -72,13 +72,13 @@ return () => {}
     // conexion a la bd
     const baseDeDatos = getFirestore(); // Guardamos la referencia de la coleccion que queremos tomar
     const itemCollection = baseDeDatos.collection("Items"); // Tomando los datos
-    itemCollection.get().then((value) => {
-      let aux = value.docs.map( async (element) => {
+    itemCollection.get().then(async (value) => {
+      let aux = await Promise.all(value.docs.map( async (element) => {
         // llamar otra vez a la bd tomando la categoriaID del element
         const CategoriasCollection = baseDeDatos.collection("Categorias");
         let auxCategorias = await CategoriasCollection.doc(element.data().categoryID).get();
-        return { ...element.data(), categoria: auxCategorias.data() };
-      });
+        return { ...element.data(), categoria: auxCategorias.data().nombre };
+      }));
       setProductos(aux);
     });
   }, [id]);

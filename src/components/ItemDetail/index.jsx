@@ -27,7 +27,7 @@ return (
         <div>
             <ul className='itemList'>
                 <div className='detail'>
-                    <img src={`../${product.image}`} alt={product.description}></img>
+                    <img src={product.image} alt={product.description}></img>
                     <h3>{product.name}</h3>
                     <p>Descripción: {product.description}</p>
                     <p>Precio: ${product.price}</p>

@@ -11,6 +11,11 @@ const ItemCount = ({stock,onAdd}) => {
     const [contador, setContador] = useState(1);
 
     //funcion que aumenta la cantidad:
+/* hacer esto es buena practica: es para comentar lo que hacen las funciones */
+    /**
+    *
+    * @param {*name} name esta funcion es para incrementar el contador
+    */
     const incrementar = (stoc)=> {
         if (contador < stoc){
             setContador(contador + 1);

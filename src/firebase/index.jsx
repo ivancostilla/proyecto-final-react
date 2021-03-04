@@ -1,14 +1,13 @@
 import firebase from "firebase/app";
-import "firebase/firestore";
+import "@firebase/firestore";
 
 const app = firebase.initializeApp({
-  apiKey: "AIzaSyBoSXvxpOvy1zF8TTPVG31xXqB9tGuq9y0",
-  authDomain: "reactcoderhouse-12b45.firebaseapp.com",
-  projectId: "reactcoderhouse-12b45",
-  storageBucket: "reactcoderhouse-12b45.appspot.com",
-  messagingSenderId: "167123040137",
-  appId: "1:167123040137:web:a1dfb1bb055701cc749358",
-  measurementId: "G-WJQ6T43Y9V",
+  apiKey: "AIzaSyCQWkJDyCjRyPs40HcxCliDfEHPWlw_-Qo",
+  authDomain: "coder-484e0.firebaseapp.com",
+  projectId: "coder-484e0",
+  storageBucket: "coder-484e0.appspot.com",
+  messagingSenderId: "160300116551",
+  appId: "1:160300116551:web:0830633324f8f1eec89f62"
 });
 export const getFirebase = () => {
   return app;

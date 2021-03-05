@@ -32,7 +32,7 @@ const CartWidget =()=>{
             )}
                 <p>Precio total de tu compra: {precioTotal}</p>
                 <NavLink className='a' to='/carrito' onClick={() => setShow(false)}>Terminar Compra</NavLink>
-                <button onClick={() => setShow(false)}>Cerrar</button>
+                <button className='button' onClick={() => setShow(false)}>Cerrar</button>
         </div> 
         }
         </div>

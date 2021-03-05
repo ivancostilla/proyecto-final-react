@@ -3,7 +3,7 @@ import "./style.css";
 import ItemList from "../components/ItemList";
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../firebase";
-/* todo: agregar localstorage y reactmemo */
+/* todo: agregar localstorage y reactmemo, modificar stock de firebase, agregarproductosafirebase dinamicamene */
 const ItemListContainer = () => {
   /* https://api.mercadolibre.com/products/search?status=active&site_id=MLA&q=Samsung&limit=5000
    */
@@ -55,11 +55,13 @@ return () => {}
       );
       setLoading(false);
       if (id) {
+        /* filtro los productos por categoria */
         setProductos(aux.filter((product) => product.categoria === id));
         setRuta(true);
       } else {
         setRuta(false);
         setProductos(aux);
+        /* se guardan los productos de cada categoria en distintos states */
         setRemera(aux.filter((product) => product.categoria === "remeras"));
         setPantalon(aux.filter((product) => product.categoria === "pantalones"));
         setZapatillas(aux.filter((product) => product.categoria === "zapatillas"));

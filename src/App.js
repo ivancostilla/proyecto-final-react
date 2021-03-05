@@ -2,10 +2,11 @@ import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 // import ButtonComponent from './components/Button';
+import ProductNav from "./components/ProductNav";
+import Checkout from "./components/Checkout";
+import CartContainer from "./layout/CartContainer";
 import ItemListContainer from "./layout/ItemListContainer";
 import ItemDetailContainer from "./layout/ItemDetailContainer";
-import CartContainer from "./layout/CartContainer";
-import ProductNav from "./components/ProductNav";
 import { CartProvider } from "./context/CartContext";
 
 //parametro es un valor que se le pasa a una funcion
@@ -49,6 +50,9 @@ const App = () => {
                 </Route>
                 <Route exact path="/carrito">
                   <CartContainer />
+                </Route>
+                <Route exact path="/checkout">
+                  <Checkout/>
                 </Route>
                 {/*
                         {/* <Route exact path='/boton'>

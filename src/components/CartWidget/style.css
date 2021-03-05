@@ -26,7 +26,7 @@
 height: 60px;
 width: 60px;
 }
-.carritoOpen button{
+.carritoOpen .button{
     display: block;
     width: 50%;
     color: #108568;

@@ -45,9 +45,11 @@ export const CartProvider = ({ children }) => {
     setTotalCant(totalCant - cantidad);
   };
 
-  const clearCart = () => {
+  const clearCart = (precio) => {
     setCart([]);
     setTotalCant(0);
+    setPrecioTotal(precioTotal - precio);
+
   };
   return (
     <CartContext.Provider

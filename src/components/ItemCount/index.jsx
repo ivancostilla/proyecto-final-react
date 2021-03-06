@@ -30,9 +30,6 @@ const ItemCount = ({stock,onAdd}) => {
 
     return (
         <>
-        <div>
-            <p>Stock disponible: <b>{stock}</b>u</p>
-        </div>
         <button onClick={()=>{decrementar()}}>-</button>
         <b>{contador}</b>
         {/* para poder pasar parametros tengo que hacer un arrow  function */}
@@ -40,9 +37,7 @@ const ItemCount = ({stock,onAdd}) => {
         <div>
             <button onClick={(e) => {
         // localStorage.setItem('carrito', JSON.stringify([...cart]));
-       onAdd(e, contador)
-            }}>Agregar al carrito</button>
-            
+        onAdd(e, contador)}}>Agregar al carrito</button>
         </div>
         </>
     )

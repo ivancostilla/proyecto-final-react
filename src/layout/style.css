@@ -11,3 +11,6 @@ font-size: 3rem;
 .cart{
     margin-top: 100px;
 }
+.cart .a{
+    display: block;
+}

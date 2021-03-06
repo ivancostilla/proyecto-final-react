@@ -1,12 +1,12 @@
 import React from "react";
 import { useCartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import './style.css';
 
 const Carrito = () => {
   const { cart, precioTotal, removeItem, clearCart } = useCartContext();
-
   return (
-    <div className="carrito">
+    <div className="cart">
       <h1>Carrito</h1>
       {cart.length > 0 ? (
         <div>
@@ -24,12 +24,7 @@ const Carrito = () => {
             ))
           )}
           <p>Precio total: <b>${precioTotal}</b></p>
-          {React.Children.toArray(
-            cart.map((prod) => (
-          cart.length > 0 && (<button onClick={()=>{clearCart(prod.product.price * prod.cantidad)}}>Eliminar Todo</button>)
-          ))
-          )}
-
+          <button onClick={()=>{clearCart(precioTotal)}}>Eliminar Todo</button>    
         </div>
       ) : (
         <div>
@@ -37,7 +32,8 @@ const Carrito = () => {
           <Link className="a" to="/">Volver al inicio</Link>
         </div>
       )}
-      {cart.length > 0 && (<Link className="a" to="/checkout">Finalizar Compra</Link>)}
+      {cart.length > 0 && (<Link className="a" to="/checkout">Finalizar Compra</Link> )}
+      <Link className='a' to="/category">Seguir comprando</Link>
     </div>
   );
 };

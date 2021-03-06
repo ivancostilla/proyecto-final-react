@@ -3,7 +3,7 @@ import "./style.css";
 import ItemList from "../components/ItemList";
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../firebase";
-/* todo: agregar localstorage y reactmemo, modificar stock de firebase, agregarproductosafirebase dinamicamene */
+/* todo: agregar localstorage y reactmemo(clase11), modificar stock de firebase, agregarproductosafirebase dinamicamene(crud) */
 const ItemListContainer = () => {
   /* https://api.mercadolibre.com/products/search?status=active&site_id=MLA&q=Samsung&limit=5000
    */
@@ -26,7 +26,6 @@ return () => {}
   const [loading, setLoading] = useState(true);
   /* useState: lo uso para guardar los productos traidos con useEffect */
   const [productos, setProductos] = useState([]);
-
   /* estados para separar los items por categorias */
   const [remera, setRemera] = useState([]);
   const [pantalon, setPantalon] = useState([]);
@@ -36,7 +35,6 @@ return () => {}
   const [ruta, setRuta] = useState(true);
   const { id } = useParams();
 
-  /* simulo pedido a una api: */
   useEffect(() => {
     /* antes de que cargen los productos coloco un loading: */
     setLoading(true);

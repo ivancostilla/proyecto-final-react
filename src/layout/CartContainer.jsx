@@ -16,8 +16,8 @@ const Carrito = () => {
                 <img src={prod.product.image} alt={prod.product.description}></img>
                 <h2>{prod.product.name}</h2>
                 <p>Cantidad: {prod.cantidad}</p>
-                <p>Precio por unidad: {prod.product.price}</p>
-                <p>Precio total: {prod.product.price * prod.cantidad}</p>
+                <p>Precio por unidad: ${prod.product.price}</p>
+                <p>Precio total: ${prod.product.price * prod.cantidad}</p>
                 <button onClick={() =>removeItem(prod.product.id, prod.product.price * prod.cantidad, prod.cantidad)}>Eliminar item</button>
                 <hr/>
               </div>

@@ -16,7 +16,7 @@ const Checkout = () => {
     const [date,setDate] = useState("")
 /* este hook lo uso paragurardar el precioTotal, ya que al darle alboton comprar del formulario, el carrito se vacia, y si pasamos a la pantalla de compra exitosa, el precio me salia 0, al usar este state puedo guardar elprecio y mostrarselo al cliente: */
     const [precioFinal,setPrecioFinal]= useState(0)
-
+    const [cartFinal,setCartFinal]= useState([])
     const manejarCompra = (e) => {
         e.preventDefault()
         let fecha = new Date()
@@ -44,7 +44,6 @@ const Checkout = () => {
                 console.log(err);
             });   
         }
-
     return (
         <>
             {
@@ -54,15 +53,24 @@ const Checkout = () => {
                         <p>el total de tu compra es: ${precioFinal}</p>
                         <p>Tu numero de orden es: <strong>{orderId}</strong> </p>
                         <p>fecha de compra: {date}</p>
+                        <p>Tus productos comprados:</p>
+                        {React.Children.toArray(
+                            cartFinal.map((prod) => (
+                                <div>
+                                        <img src={prod.product.image} alt={prod.product.description}></img>
+                                        <h2>{prod.product.name}</h2>
+                                        <p>{prod.product.description}</p>
+                                        <p>Cantidad: {prod.cantidad}</p>
+                                        <hr/>
+                                </div>
+                            ))
+                        )}
                     </section>
                     :
                     <section>
-                    {React.Children.toArray(
-                    /* hago un map del cart para poder mandar el parametro que necesito a la funcion clearCart */
-                        cart.map((prod) => (
-                            <div>
+                            <div className='compraRealizada'>
                                 <h1>Checkout</h1>
-                                <form onSubmit={(e)=>{manejarCompra(e);clearCart(prod.product.price * prod.cantidad);setPrecioFinal(precioTotal)}}>
+                                <form onSubmit={(e)=>{manejarCompra(e);clearCart(precioTotal);setPrecioFinal(precioTotal);setCartFinal(cart)}}>
                                     <div>
                                         <label htmlFor='nombre'>Nombre:</label>
                                        <input value={nombre} name='nombre' onChange={(e) => { setNombre(e.target.value) }} type="text" pattern="[a-zA-Z ]{2,254}" required/>
@@ -93,8 +101,6 @@ const Checkout = () => {
                                     {email === confirmEmail && direccion && telefono && apellido && nombre ? <button type="submit">Comprar</button> : <button type="submit" disabled>Comprar</button>}  
                                 </form>
                             </div>
-                        ))
-                    )}
                     <p>el total de tu compra es: ${precioTotal}</p>
                     </section>
             }

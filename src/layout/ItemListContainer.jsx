@@ -3,7 +3,7 @@ import "./style.css";
 import ItemList from "../components/ItemList";
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../firebase";
-/* todo: agregar localstorage y reactmemo(clase11), modificar stock de firebase, agregarproductosafirebase dinamicamene(crud) */
+/* todo: terminanrde validarnotFound;agregar localstorage y reactmemo(clase11), modificar stock de firebase, agregarproductosafirebase dinamicamene(crud) */
 const ItemListContainer = () => {
   /* https://api.mercadolibre.com/products/search?status=active&site_id=MLA&q=Samsung&limit=5000
    */

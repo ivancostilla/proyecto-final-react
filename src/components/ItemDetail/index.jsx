@@ -38,7 +38,7 @@ return (
                     <p>Marca: {product.marca}</p>
                     <p>Modelo: {product.modelo}</p>
                     <p>Stock disponible: <b>{product.stock}</b>u</p>
-                    {showCounter === true ? <ItemCount stock={product.stock} onAdd={handleAddProduct}/> : <Link className='a' to="/carrito">Terminar compra</Link>}
+                    {showCounter === true ? <ItemCount stock={product.stock} onAdd={handleAddProduct}/> : <Link className='a' to="/cart">Terminar compra</Link>}
                     <Link className='a' to="/category">Seguir comprando</Link>
                 </div>
             </ul>

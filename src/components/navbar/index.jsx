@@ -8,10 +8,10 @@ return (
     <nav className='navbar'>
         <ul className='ul'>
             <li><NavLink activeClassName='activehome' className='a' to="/">Tienda App</NavLink></li>
-            <CartWidget/>
             <li><NavLink activeClassName='active' className="a" to="/category">Productos</NavLink></li>
             <li><NavLink activeClassName='active' className='a' to="/ingresar">Ingresar</NavLink></li>
             <li><NavLink activeClassName='active' className='a' to="/registrarse">Registrarse</NavLink></li>
+            <CartWidget/>
         </ul>
     </nav>
 );

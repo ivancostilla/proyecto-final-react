@@ -38,11 +38,11 @@ const ItemDetailContainer = () => {
   return (
     <>
       {loading ? <h1 className="h1">Cargando producto...</h1>
-      /* si elproducto no existe es undefined, por lo tanto me lleva alcomponente NotFound */
+      /* si el producto no existe es undefined, por lo tanto me lleva alcomponente NotFound */
             : !loading && product === undefined ? <NotFound/>
             : 
           <div>
-          <ItemDetail product={product} />
+            <ItemDetail product={product} />
           </div>
       }
     </>

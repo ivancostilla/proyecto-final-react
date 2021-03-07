@@ -5,7 +5,7 @@ import firebase from 'firebase/app'
 import './style.css'
 // import CompraExitosa from '../CompraExitosa'
 const Checkout = () => {
-    const { precioTotal, cart, clearCart } = useCartContext()
+    const { precioTotal, cart, clearCart, totalCant } = useCartContext()
     const [nombre, setNombre] = useState("")
     const [apellido, setApellido] = useState("")
     const [telefono, setTelefono] = useState("")
@@ -16,6 +16,7 @@ const Checkout = () => {
     const [date,setDate] = useState("")
 /* este hook lo uso paragurardar el precioTotal, ya que al darle alboton comprar del formulario, el carrito se vacia, y si pasamos a la pantalla de compra exitosa, el precio me salia 0, al usar este state puedo guardar elprecio y mostrarselo al cliente: */
     const [precioFinal,setPrecioFinal]= useState(0)
+    const [cantidadFinal,setCantidadFinal]= useState(0)
     const [cartFinal,setCartFinal]= useState([])
     const manejarCompra = (e) => {
         e.preventDefault()
@@ -53,7 +54,9 @@ const Checkout = () => {
                         <p>el total de tu compra es: ${precioFinal}</p>
                         <p>Tu numero de orden es: <strong>{orderId}</strong> </p>
                         <p>fecha de compra: {date}</p>
+                        <p>cantidad de productos comprados: {cantidadFinal}</p>
                         <p>Tus productos comprados:</p>
+
                         {React.Children.toArray(
                             cartFinal.map((prod) => (
                                 <div>
@@ -70,7 +73,7 @@ const Checkout = () => {
                     <section>
                             <div className='compraRealizada'>
                                 <h1>Checkout</h1>
-                                <form onSubmit={(e)=>{manejarCompra(e);clearCart(precioTotal);setPrecioFinal(precioTotal);setCartFinal(cart)}}>
+                                <form onSubmit={(e)=>{manejarCompra(e);clearCart(precioTotal);setPrecioFinal(precioTotal);setCartFinal(cart);setCantidadFinal(totalCant)}}>
                                     <div>
                                         <label htmlFor='nombre'>Nombre:</label>
                                        <input value={nombre} name='nombre' onChange={(e) => { setNombre(e.target.value) }} type="text" pattern="[a-zA-Z ]{2,254}" required/>

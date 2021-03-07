@@ -7,7 +7,10 @@ import Checkout from "./components/Checkout";
 import CartContainer from "./layout/CartContainer";
 import ItemListContainer from "./layout/ItemListContainer";
 import ItemDetailContainer from "./layout/ItemDetailContainer";
+import Footer from "./components/Footer";
 import { CartProvider } from "./context/CartContext";
+import NotFound from "./components/NotFound";
+import Admin from "./components/Admin";
 
 //parametro es un valor que se le pasa a una funcion
 //un callback es una funcion que se ejecuta cuando algo pasó,
@@ -48,11 +51,14 @@ const App = () => {
                 <Route exact path="/item/:id">
                   <ItemDetailContainer />
                 </Route>
-                <Route exact path="/carrito">
+                <Route exact path="/cart">
                   <CartContainer />
                 </Route>
                 <Route exact path="/checkout">
                   <Checkout/>
+                </Route>
+                <Route exact path="/administrador">
+                  <Admin/>
                 </Route>
                 {/*
                         {/* <Route exact path='/boton'>
@@ -62,13 +68,16 @@ const App = () => {
                             </ButtonComponent>
                         </Route> */}
                 {/* para error 404: */}
-                {/*   <Route path="*" children={<div>Not found</div>}>
-                            </Route>}*/}
+                <Route path="*">
+                    <NotFound/>
+                </Route>
               </Switch>
             </article>
           </section>
         </main>
-        <footer></footer>
+        <footer>
+          <Footer/>
+        </footer>
       </BrowserRouter>
     </CartProvider>
   );

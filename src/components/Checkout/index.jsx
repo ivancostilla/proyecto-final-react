@@ -18,8 +18,6 @@ const Checkout = () => {
   const [precioFinal, setPrecioFinal] = useState(0);
   const [cantidadFinal, setCantidadFinal] = useState(0);
   const [cartFinal, setCartFinal] = useState([]);
-  /* este estado es para una segunda validación por si fuese necesario */
-  const [errorStock, setErrorStock] = useState(false);
 
   const manejarCompra = (e) => {
     e.preventDefault();
@@ -54,7 +52,6 @@ const Checkout = () => {
                 if (docSnapshot.data().stock >= cart[idx].cantidad) {
                     batch.update(docSnapshot.ref, { stock: docSnapshot.data().stock - cart[idx].cantidad });
                 } else {
-                  setErrorStock(true)
                   outOfStock.push({ ...docSnapshot.data(), id: docSnapshot.id });
                 }
             })
@@ -72,14 +69,12 @@ const Checkout = () => {
   return (
     <>
       {cantidadSeleccionadaPorUsuario > stockFirebase ?
-      <div className='compraRealizada'>
-                  <p>Error, no se puede comprar esta cantidad de productos</p>
-
+      (<div className='compraRealizada'>
+        <p>Error, no se puede comprar esta cantidad de productos</p>
         <Link className='a' to='/'>Volver al Inicio</Link>
-      </div>
+      </div>)
       :
-      orderId ? (
-        errorStock === false ? 
+      (orderId ? (
         <section className="compraRealizada">
           <h2>{nombre} felicidades, tu compra fué realizada con exito!</h2>
           <p>el total de tu compra es: ${precioFinal}</p>
@@ -87,7 +82,6 @@ const Checkout = () => {
           <p>fecha de compra: {date}</p>
           <p>cantidad de productos comprados: {cantidadFinal}</p>
           <p>Tus productos comprados:</p>
-
           {React.Children.toArray(
             cartFinal.map((prod) => (
               <div>
@@ -103,11 +97,6 @@ const Checkout = () => {
             ))
           )}
         </section>
-          :
-        <div className='compraRealizada'>
-          <p>Error, no se puede comprar esta cantidad de productos</p>
-          <Link className='a' to='/'>Volver al Inicio</Link>
-        </div>
       ) : (
         <section>
           <div className="compraRealizada">
@@ -121,37 +110,37 @@ const Checkout = () => {
               }}>
               <div>
                 <label htmlFor="nombre">Nombre:</label>
-                <input value={nombre} name="nombre" onChange={(e) => {setNombre(e.target.value)}}type="text" pattern="[a-zA-Z ]{2,254}" required/>
+                <input value={nombre} name="nombre" onChange={(e) => {setNombre(e.target.value)}}type="text" pattern="[a-zA-Z ]{2,254}"required/>
               </div>
               <div>
                 <label htmlFor="apellido">Apellido:</label>
-                <input value={apellido} name="apellido" onChange={(e) => {setApellido(e.target.value)}} type="text" pattern="[a-zA-Z ]{2,254}" required/>
+                <input value={apellido} name="apellido" onChange={(e) => {setApellido(e.target.value)}} type="text" pattern="[a-zA-Z ]{2,254}"required/>
               </div>
               <div>
                 <abbr title="Télefonos validos de Argentina">
                   <label htmlFor="telefono">Teléfono:</label>
                   {/* solo telefonos validos de Argentina */}
-                  <input value={telefono} name="telefono" onChange={(e) => {setTelefono(e.target.value)}} type="tel" pattern="^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}" required/>
+                  <input value={telefono} name="telefono" onChange={(e) => {setTelefono(e.target.value)}} type="tel" pattern="^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}"required/>
                 </abbr>
               </div>
               <div>
                 <label htmlFor="direccion">Dirección:</label>
-                <input value={direccion} name="direccion" onChange={(e) => {setDireccion(e.target.value)}} type="tel" required/>
+                <input value={direccion} name="direccion" onChange={(e) => {setDireccion(e.target.value)}} type="tel"required/>
               </div>
               <div>
-                <label htmlFor="email">Correo Electrónico:</label> required
-                <input value={email} name="email" onChange={(e) => {setEmail(e.target.value)}}type="email" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$" required/>
+                <label htmlFor="email">Correo Electrónico:</label>
+                <input value={email} name="email" onChange={(e) => {setEmail(e.target.value)}}type="email" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"required/>
               </div>
               <div>
                 <label htmlFor="confirmEmail">Confirmar Correo Electrónico:</label>
-                <input value={confirmEmail} name="confirmEmail" onChange={(e) => {setConfirmEmail(e.target.value)}} type="email" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$" required/>
+                <input value={confirmEmail} name="confirmEmail" onChange={(e) => {setConfirmEmail(e.target.value)}} type="email" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"required/>
               </div>
               {email === confirmEmail && direccion && telefono && apellido && nombre ? <button type="submit">Comprar</button> : <button type="submit" disabled>Comprar</button>}  
             </form>
           </div>
           <p>el total de tu compra es: ${precioTotal}</p>
         </section>
-      )}
+      ))}
     </>
   );
 };

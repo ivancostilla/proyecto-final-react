@@ -3,10 +3,8 @@ import "./style.css";
 import ItemList from "../components/ItemList";
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../firebase";
-/* todo: terminanrde validarnotFound;agregar localstorage y reactmemo(clase11), modificar stock de firebase, agregarproductosafirebase dinamicamene(crud) */
+/* todo: reactmemo(clase11), agregarproductosafirebase dinamicamene(crud),login de google y fb */
 const ItemListContainer = () => {
-  /* https://api.mercadolibre.com/products/search?status=active&site_id=MLA&q=Samsung&limit=5000
-   */
   /* consumiendo apis clase 7: */
   /* useEffect(()=>{
 fetch("https://api.mercadolibre.com/products/search?status=active&site_id=MLA&q=Samsung&limit=5000")
@@ -41,7 +39,7 @@ return () => {}
 
     // conexion a la bd
     const baseDeDatos = getFirestore(); // Guardamos la referencia de la coleccion que queremos tomar
-    const itemCollection = baseDeDatos.collection("Items"); // Tomando los datos
+    const itemCollection = baseDeDatos.collection("Items"); // Tomando los datos de la collecion items
     itemCollection.get().then(async (value) => {
       let aux = await Promise.all(
         value.docs.map(async (element) => {
@@ -64,7 +62,7 @@ return () => {}
         setPantalon(aux.filter((product) => product.categoria === "pantalones"));
         setZapatillas(aux.filter((product) => product.categoria === "zapatillas"));
         setGorra(aux.filter((product) => product.categoria === "gorras"));
-    }
+      }
     });
   }, [id]);
 

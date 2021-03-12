@@ -6,7 +6,7 @@ import './style.css';
 
 const ItemDetail = ({product}) => {   
 
-    const {addToCart} = useCartContext();
+    const {addToCart,setStockFirebase} = useCartContext();
     const [showCounter, setShowCounter] = useState(true);
     const handleAddProduct = (e, cantidad) => {
         e.stopPropagation();
@@ -19,9 +19,9 @@ const ItemDetail = ({product}) => {
         /* una vez apretado el boton "agregar al carrito, uso el state para ponerlo en false
         y asi muestro el boton que lleva al carrito" */
         setShowCounter(false);
+        setStockFirebase(product.stock);
+    }   
 
-    }
-    
 return (
     <>
         <div>
@@ -37,8 +37,11 @@ return (
                     <p>Diseño de la tela: {product.tela}</p>
                     <p>Marca: {product.marca}</p>
                     <p>Modelo: {product.modelo}</p>
-                    <p>Stock disponible: <b>{product.stock}</b>u</p>
-                    {showCounter === true ? <ItemCount stock={product.stock} onAdd={handleAddProduct}/> : <Link className='a' to="/cart">Terminar compra</Link>}
+                    { product.stock >= 1 ? <p>Stock disponible: <b>{product.stock}</b>u</p> : <p>No hay stock</p> }
+                    {product.stock >= 1 ?
+                    (showCounter === true ? <ItemCount stock={product.stock} onAdd={handleAddProduct}/> : <Link className='a' to="/cart">Terminar compra</Link>)
+                    : null
+                    }
                     <Link className='a' to="/category">Seguir comprando</Link>
                 </div>
             </ul>

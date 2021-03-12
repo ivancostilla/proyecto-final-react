@@ -1,12 +1,19 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useCartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
 import './style.css';
 
 const Carrito = () => {
-  const { cart, precioTotal, removeItem, clearCart } = useCartContext();
+  const { cart, precioTotal, removeItem, clearCart,setCantidadSeleccionadaPorUsuario} = useCartContext();
+  /* useEffect que usopara setear el estado ,en este estado guardo la cantidad delproducto que seleccionó el cliente, yen elcheckout loccomparocon elstock delproducto en firebase, si la cantidad elegida por elusuario esmayor al stock arroja un error,de lo contrario se puede seguir con la compra*/
+  useEffect(() => {
+    cart.map(prod =>{
+      return setCantidadSeleccionadaPorUsuario(prod.cantidad)
+    })
+  },[cart, setCantidadSeleccionadaPorUsuario])
   return (
-    <div className="cart">
+    <>
+<div className="cart">
       <h1>Carrito</h1>
       {cart.length > 0 ? (
         <div>
@@ -32,9 +39,10 @@ const Carrito = () => {
           <Link className="a" to="/">Volver al inicio</Link>
         </div>
       )}
-      {cart.length > 0 && (<Link className="a" to="/checkout">Finalizar Compra</Link> )}
+          {cart.length > 0 && (<button>{<Link className="a" to="/checkout">Finalizar Compra</Link>}</button>)}
       <Link className='a' to="/category">Seguir comprando</Link>
-    </div>
+      </div>
+  </>
   );
 };
 

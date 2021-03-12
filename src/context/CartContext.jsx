@@ -7,31 +7,31 @@ export const CartProvider = ({ children }) => {
   
   /* estado para ir guardando los productos que se agregan al carrito: */
   const [cart, setCart] = useState([]);
-  /* estado para guardar la cantidad de elementos agregados eal carrito:*/
+  /* estado para guardar la cantidad de elementos agregados al carrito:*/
   const [totalCant, setTotalCant] = useState(0);
-  /* estadoparaelprecio totaldelcarrito */
+  /* estado para el precio total del carrito */
   const [precioTotal, setPrecioTotal] = useState(0);
-
+  const [cantidadSeleccionadaPorUsuario, setCantidadSeleccionadaPorUsuario] = useState(0)
+  const [stockFirebase,setStockFirebase] = useState(0);
     // Local Storage Get
     useEffect(() => {
       if (localStorage.getItem('Cart') !== null) {
           setCart(JSON.parse(localStorage.getItem('Cart')));
       }
-      if (localStorage.getItem('Precio-Total') !== null) {
-          setPrecioTotal(JSON.parse(localStorage.getItem('Precio-Total')));
+      if (localStorage.getItem('PrecioTotal') !== null) {
+          setPrecioTotal(JSON.parse(localStorage.getItem('PrecioTotal')));
       }
-      if (localStorage.getItem('Cantidad-Total') !== null) {
-          setTotalCant(JSON.parse(localStorage.getItem('Cantidad-Total')));
+      if (localStorage.getItem('CantidadTotal') !== null) {
+          setTotalCant(JSON.parse(localStorage.getItem('CantidadTotal')));
       }
   }, []);
 
   // Local Storage Set
   useEffect(() => {
       localStorage.setItem('Cart', JSON.stringify(cart));
-      localStorage.setItem('Precio-Total', JSON.stringify(precioTotal));
-      localStorage.setItem('Cantidad-Total', JSON.stringify(totalCant));
+      localStorage.setItem('PrecioTotal', JSON.stringify(precioTotal));
+      localStorage.setItem('CantidadTotal', JSON.stringify(totalCant));
   }, [cart,precioTotal,totalCant]);
-
 
   /* funcion que agrega los productos al carrito: */
   const addToCart = (item, cantidad) => {
@@ -40,12 +40,12 @@ export const CartProvider = ({ children }) => {
     cart.findIndex((prod) => prod.product.id === item.product.id);
     /* seteo la cantidad de elementos agregados con los que ya se habian agregado: */
     setTotalCant(totalCant + cantidad);
-console.log(repetido)
     /* si el elemento agregado esta repetido creo un array donde guardo el cart + el valor recibido en el parametro item*/
     if (repetido !== -1) {
       const newArray = Array.from(cart);
       cart[repetido].cantidad += item.cantidad;
       setCart(newArray);
+      setPrecioTotal(precioTotal + item.product.price * item.cantidad);
     } else {
       setCart([...cart, item]);
       setPrecioTotal(precioTotal + item.product.price * item.cantidad);
@@ -68,7 +68,7 @@ console.log(repetido)
   };
   return (
     <CartContext.Provider
-      value={{ cart, totalCant, precioTotal, addToCart, removeItem, clearCart }}
+      value={{ cart, totalCant, precioTotal, addToCart, removeItem, clearCart,cantidadSeleccionadaPorUsuario,setCantidadSeleccionadaPorUsuario,stockFirebase,setStockFirebase}}
     >
       {children}
     </CartContext.Provider>

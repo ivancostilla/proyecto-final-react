@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ItemDetail from "../components/ItemDetail";
-import NotFound from "../components/NotFound"
+import NotFound from "../components/NotFound";
 // import productList from '../mocks/productList';
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../firebase";
@@ -18,16 +18,19 @@ const ItemDetailContainer = () => {
     /* antes de que cargen los productos coloco un loading: */
     // conexion a la bd
     const baseDeDatos = getFirestore(); // Guardamos la referencia de la coleccion que queremos tomar
-    const itemCollection = baseDeDatos.collection("Items"); // Tomando los datos
+    const itemCollection = baseDeDatos.collection("Items");// Tomando los datos
     itemCollection.get().then(async (value) => {
       let aux = await Promise.all(
         value.docs.map(async (element) => {
+          /* agrego un valor en cada item que es el id de su propio documento para luego poder usarlo al setear el update */
+          itemCollection.doc(element.id).update({
+            elementID: element.id,
+          });
           // llamar otra vez a la bd tomando la categoriaID del element
           const CategoriasCollection = baseDeDatos.collection("Categorias");
           let auxCategorias = await CategoriasCollection.doc(
             element.data().categoryID
           ).get();
-         
           return { ...element.data(), categoria: auxCategorias.data().nombre };
         })
       );
@@ -37,14 +40,16 @@ const ItemDetailContainer = () => {
   }, [id]);
   return (
     <>
-      {loading ? <h1 className="h1">Cargando producto...</h1>
-      /* si el producto no existe es undefined, por lo tanto me lleva alcomponente NotFound */
-            : !loading && product === undefined ? <NotFound/>
-            : 
-          <div>
-            <ItemDetail product={product} />
-          </div>
-      }
+      {loading ? (
+        <h1 className="h1">Cargando producto...</h1>
+      ) : !loading && product === undefined ? (
+        /* si el producto no existe es undefined, por lo tanto me lleva alcomponente NotFound */
+        <NotFound />
+      ) : (
+        <div>
+          <ItemDetail product={product} />
+        </div>
+      )}
     </>
   );
 };

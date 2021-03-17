@@ -1,3 +1,6 @@
+html{
+    scroll-behavior: smooth;
+}
 main{
     min-height: 100vh;
 }
@@ -16,4 +19,7 @@ font-size: 3rem;
 }
 .cart .a{
     display: block;
+}
+.cart img{
+    object-fit: cover;
 }

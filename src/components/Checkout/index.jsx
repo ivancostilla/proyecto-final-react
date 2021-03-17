@@ -42,7 +42,7 @@ const Checkout = () => {
     .then(({ id }) => {
       setOrderId(id);
       /*en el checkout hago un set en el stock para guardarlo, una vez el cliente haya hecho su compra */
-        const itemsToUpdate = db.collection('Items').where(firebase.firestore.FieldPath.documentId(), 'in', cart.map((i) => i.product.elementID));
+        const itemsToUpdate = db.collection('Items').where(firebase.firestore.FieldPath.documentId(), 'in', cart.map((i) => i.product.id));
         const updateStock = async () => {
             const query = await itemsToUpdate.get();
             const batch = db.batch();
@@ -125,11 +125,11 @@ const Checkout = () => {
               </div>
               <div>
                 <label htmlFor="direccion">Dirección:</label>
-                <input value={direccion} name="direccion" onChange={(e) => {setDireccion(e.target.value)}} type="tel"required/>
+                <input value={direccion} name="direccion" onChange={(e) => {setDireccion(e.target.value)}} type="text"required/>
               </div>
               <div>
                 <label htmlFor="email">Correo Electrónico:</label>
-                <input value={email} name="email" onChange={(e) => {setEmail(e.target.value)}}type="email" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"required/>
+                <input value={email} name="email" onChange={(e) => {setEmail(e.target.value)}} type="email" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"required/>
               </div>
               <div>
                 <label htmlFor="confirmEmail">Confirmar Correo Electrónico:</label>

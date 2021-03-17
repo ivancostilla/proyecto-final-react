@@ -3,7 +3,7 @@ import "./style.css";
 import ItemList from "../components/ItemList";
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../firebase";
-/* todo: reactmemo(clase11), agregarproductosafirebase dinamicamene(crud),login de google y fb */
+/* todo: reactmemo(clase11),login de google y fb,cuenta administrador y pasarela de pagos ml */
 const ItemListContainer = () => {
   /* consumiendo apis clase 7: */
   /* useEffect(()=>{
@@ -29,6 +29,8 @@ return () => {}
   const [pantalon, setPantalon] = useState([]);
   const [zapatillas, setZapatillas] = useState([]);
   const [gorra, setGorra] = useState([]);
+  const [medias, setMedias] = useState([]);
+
   // /* estado para mostrar los items ordenados en la home, o dividirlos por categorias:*/
   const [ruta, setRuta] = useState(true);
   const { id } = useParams();
@@ -62,6 +64,7 @@ return () => {}
         setPantalon(aux.filter((product) => product.categoria === "pantalones"));
         setZapatillas(aux.filter((product) => product.categoria === "zapatillas"));
         setGorra(aux.filter((product) => product.categoria === "gorras"));
+        setMedias(aux.filter((product) => product.categoria === "medias"));
       }
     });
   }, [id]);
@@ -92,6 +95,9 @@ return () => {}
           <p>------------------------------</p>
           <h2>Gorras:</h2>
           <ItemList products={gorra} />
+          <p>------------------------------</p>
+          <h2>Medias:</h2>
+          <ItemList products={medias} />
         </div>
       )}
     </>

@@ -22,15 +22,9 @@ const ItemDetailContainer = () => {
     itemCollection.get().then(async (value) => {
       let aux = await Promise.all(
         value.docs.map(async (element) => {
-          /* agrego un valor en cada item que es el id de su propio documento para luego poder usarlo al setear el update */
-          itemCollection.doc(element.id).update({
-            elementID: element.id,
-          });
           // llamar otra vez a la bd tomando la categoriaID del element
           const CategoriasCollection = baseDeDatos.collection("Categorias");
-          let auxCategorias = await CategoriasCollection.doc(
-            element.data().categoryID
-          ).get();
+          let auxCategorias = await CategoriasCollection.doc(element.data().categoryID).get();
           return { ...element.data(), categoria: auxCategorias.data().nombre };
         })
       );

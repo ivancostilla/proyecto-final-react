@@ -16,5 +16,19 @@ const productList = [
 {category:"005",id:"42",name:"gorra",image:"images/gorra.jpg",description:"gorra con cierre ajustable",price:1000,stock:26,envio:"a todo el país",talle:'Único 38 a 44',color:'Negro',tela:'Liso',marca:'gorro',modelo:'5'},
 {category:"005",id:"43",name:"gorra",image:"images/gorra.jpg",description:"gorra con cierre ajustable",price:1250,stock:41,envio:"a todo el país",talle:'Único 38 a 44',color:'Negro',tela:'Liso',marca:'gorro',modelo:'5'}
 ];
+/*     const CategoriasCollection = db.collection("Categorias");
+    CategoriasCollection.get().then(async (value) => {
+      let nombreCategoria = await Promise.all(
+        value.docs.map(async (element) => {
+          let auxcategoria = await CategoriasCollection.doc(element.id).get();
+          return auxcategoria.data().nombre
+        })
+      );
+      nombreCategoria.map(catnom =>{  
+        if(catnom === categoria){
+            console.log("la categoria es:" + catnom)
 
+            }
+      }) 
+    });*/
 export default productList;

@@ -11,6 +11,8 @@ import Footer from "./components/Footer";
 import { CartProvider } from "./context/CartContext";
 import NotFound from "./components/NotFound";
 import Admin from "./components/Admin";
+import AddItemsAdmin from "./components/AddItemsAdmin";
+import AdminItems from "./components/AdminItems";
 
 //parametro es un valor que se le pasa a una funcion
 //un callback es una funcion que se ejecuta cuando algo pasó,
@@ -59,6 +61,12 @@ const App = () => {
                 </Route>
                 <Route exact path="/administrador">
                   <Admin/>
+                </Route>
+                <Route exact path="/agregarProductoNuevo">
+                  <AddItemsAdmin/>
+                </Route>
+                <Route exact path="/editarProductos">
+                  <AdminItems/>
                 </Route>
                 {/*
                         {/* <Route exact path='/boton'>

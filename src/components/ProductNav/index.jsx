@@ -11,6 +11,7 @@ function ProductNav() {
                 <li><NavLink activeClassName='active' className="a" to="/category/pantalones">Pantalones</NavLink></li>
                 <li><NavLink activeClassName='active' className="a" to="/category/zapatillas">Zapatillas</NavLink></li>
                 <li><NavLink activeClassName='active' className="a" to="/category/gorras">Gorras</NavLink></li>
+                <li><NavLink activeClassName='active' className="a" to="/category/medias">Medias</NavLink></li>
             </ul>
         </div>
     )

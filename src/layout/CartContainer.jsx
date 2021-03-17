@@ -20,7 +20,7 @@ const Carrito = () => {
           {React.Children.toArray(
             cart.map((prod) => (
               <div>
-                <img src={prod.product.image} alt={prod.product.description}></img>
+                <img src={prod.product.image} width="200" height="200" alt={prod.product.description}></img>
                 <h2>{prod.product.name}</h2>
                 <p>Cantidad: {prod.cantidad}</p>
                 <p>Precio por unidad: ${prod.product.price}</p>

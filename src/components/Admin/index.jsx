@@ -11,7 +11,7 @@ const Admin = () => {
     return (
         <div className='admin'>
             <Link className="a" to="/agregarProductoNuevo">Agregar Producto Nuevo</Link>
-            <Link className="a" to="/editarProductos">Editar Productos</Link>
+            <Link className="a" to="/ordenesDeCompras">Ver órdenes de compras</Link>
         </div>
     )
 }

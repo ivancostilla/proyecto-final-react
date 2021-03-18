@@ -149,10 +149,10 @@ const getLinkByID = useCallback(async (id)=>{
       <form onSubmit={(e) => {
           handleUpload(e);
         }}>
+         <img src={currentID !== "" ? producto.image : file} width="90" height="90" alt=""/>
         <label htmlFor="img">Seleccionar Imagen:</label>
         <input type="file" name="img" accept=".webp,.jpg" onChange={handleImage} required/>
         <progress value={upload} max="100"></progress>
-        <img src={producto.image}width="90" height="90" alt=""/>
         <input type="text" onChange={(e) => {setTitulo(e.target.value);}} placeholder="Nombre" required/>
         <input type="text" onChange={(e) => { setDescripcion(e.target.value);}} placeholder="Descripción"required/>
         <input type="number" onChange={(e) => { setPrecio(e.target.value); }} placeholder="Precio" required/>
@@ -228,7 +228,6 @@ const getLinkByID = useCallback(async (id)=>{
       </div>
        <div className='admin'>
         <Link className="a" to="/administrador">Volver</Link>
-        <Link className="a" to="/editarProductos">Editar Productos</Link>
       </div>
   </div>
   );

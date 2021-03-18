@@ -38,6 +38,16 @@ const Checkout = () => {
     /* tengo que hacer una comparacion, si el contador decantidad es igual omenor que elstock de firebase habilito la llamada a firebase y si nomuestro un mensaje de error*/
     const db = getFirestore();
     const OrderCollection = db.collection("Orders");
+    OrderCollection.get().then(async (value) => {
+      await Promise.all(
+       value.docs.map(async (element) => {
+         /* agrego un valor en cada item que es el id de su propio documento para que no se repitan los ids */
+         OrderCollection.doc(element.id).update(
+           {idOrder : element.id,}
+           )
+       })
+      );
+     });
     OrderCollection.add(datosCompra)
     .then(({ id }) => {
       setOrderId(id);

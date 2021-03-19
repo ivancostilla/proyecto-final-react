@@ -3,7 +3,7 @@ import { getFirestore } from "../../firebase";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import "./style.css";
-/* compareel value del imput con el campo deldocumentoencategorias, faltacolocar el idcorrecto */
+/* compareel value del imput con el campo del documento en categorias, faltacolocar el idcorrecto */
 const AddItemsAdmin = () => {
   const [file, setFile] = useState("");
   const [upload, setUpload] = useState(0);

@@ -13,6 +13,11 @@ import NotFound from "./components/NotFound";
 import Admin from "./components/Admin";
 import AddItemsAdmin from "./components/AddItemsAdmin";
 import AdminOrders from "./components/AdminOrders";
+import Login from "./components/Login";
+import { AuthProvider } from "./context/AuthContext";
+import SignUp from "./components/SignUp";
+import PerfilUsuario from "./components/PerfilUsuario";
+import PrivateRoute from "./components/PrivateRoute";
 
 //parametro es un valor que se le pasa a una funcion
 //un callback es una funcion que se ejecuta cuando algo pasó,
@@ -30,6 +35,7 @@ y contienen a muchos contenedores hijos, que son de presentacion */
 
 const App = () => {
   return (
+    <AuthProvider>
     <CartProvider>
       <BrowserRouter>
         <header>
@@ -68,6 +74,15 @@ const App = () => {
                 <Route exact path="/ordenesDeCompras">
                   <AdminOrders/>
                 </Route>
+                <Route exact path="/registrarse">
+                  <SignUp/>
+                </Route>
+                <Route exact path="/ingresar">
+                  <Login/>
+                </Route>
+                <PrivateRoute exact path="/PerfilUsuario">
+                  <PerfilUsuario/>
+                </PrivateRoute>
                 {/*
                         {/* <Route exact path='/boton'>
                             <h1>Titulo</h1>
@@ -88,6 +103,7 @@ const App = () => {
         </footer>
       </BrowserRouter>
     </CartProvider>
+    </AuthProvider>
   );
 };
 

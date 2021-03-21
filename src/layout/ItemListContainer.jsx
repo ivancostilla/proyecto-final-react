@@ -3,7 +3,7 @@ import "./style.css";
 import ItemList from "../components/ItemList";
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../firebase";
-/* todo: reactmemo(clase11),login de google y fb,cuenta administrador y pasarela de pagos ml */
+/* todo: reactmemo(clase11),guardar datos de usuario y likes de productos y pasarela de pagos ml */
 const ItemListContainer = () => {
   /* consumiendo apis clase 7: */
   /* useEffect(()=>{

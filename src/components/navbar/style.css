@@ -91,3 +91,20 @@ p.a{
   font-size: .8rem;
   cursor:pointer;
 }
+.users li{
+  font-size: .8rem;
+
+}
+.fotourl{
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  margin-left: 5px;
+  cursor:pointer;
+  }
+.perfil li{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}

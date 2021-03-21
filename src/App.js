@@ -1,7 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
-// import ButtonComponent from './components/Button';
 import ProductNav from "./components/ProductNav";
 import Checkout from "./components/Checkout";
 import CartContainer from "./layout/CartContainer";
@@ -18,7 +17,7 @@ import { AuthProvider } from "./context/AuthContext";
 import SignUp from "./components/SignUp";
 import PerfilUsuario from "./components/PerfilUsuario";
 import PrivateRoute from "./components/PrivateRoute";
-
+import ForgotPassword from "./components/ForgotPassword";
 //parametro es un valor que se le pasa a una funcion
 //un callback es una funcion que se ejecuta cuando algo pasó,
 //es un evento que ejecuta el componente y le evuelve el valor al padre
@@ -65,9 +64,7 @@ const App = () => {
                 <Route exact path="/checkout">
                   <Checkout/>
                 </Route>
-                <Route exact path="/administrador">
-                  <Admin/>
-                </Route>
+                <PrivateRoute exact path="/administrador" component={Admin}/>
                 <Route exact path="/agregarProductoNuevo">
                   <AddItemsAdmin/>
                 </Route>
@@ -80,16 +77,8 @@ const App = () => {
                 <Route exact path="/ingresar">
                   <Login/>
                 </Route>
-                <PrivateRoute exact path="/PerfilUsuario">
-                  <PerfilUsuario/>
-                </PrivateRoute>
-                {/*
-                        {/* <Route exact path='/boton'>
-                            <h1>Titulo</h1>
-                            <ButtonComponent text={`Click aqui`}>
-                            <div>Hola</div>
-                            </ButtonComponent>
-                        </Route> */}
+                <PrivateRoute exact path="/PerfilUsuario" component={PerfilUsuario}/>
+                <Route exact path="/ReestablecerContraseña" component={ForgotPassword}/>
                 {/* para error 404: */}
                 <Route path="*">
                     <NotFound/>

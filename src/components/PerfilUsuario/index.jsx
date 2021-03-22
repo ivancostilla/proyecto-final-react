@@ -1,18 +1,17 @@
-import React, { useRef,useState} from 'react';
+import React, { useRef,useState,useEffect } from 'react';
+import { getFirestore } from "../../firebase";
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext'
-
 import "./style.css"
-
 
 const PerfilUsuario = () => {
     const emailRef= useRef();
     const passRef= useRef();
     const confirmPassRef= useRef();
-    const {currentUser,updateEmail,updatePassword} = useAuthContext();
+    const {currentUser,updateEmail,updatePassword,nombre,setNombre,apellido,setApellido,direccion,setDireccion,telefono,setTelefono} = useAuthContext();
     const [error,setError]= useState("");
     const [loading,setLoading]= useState(false);
-
+  
     const handleSubmit = (e)=>{
         e.preventDefault();
         if(passRef.current.value !== confirmPassRef.current.value){
@@ -39,6 +38,55 @@ const PerfilUsuario = () => {
             setLoading(false)
         })
     }
+    /* manejo de datos de usuario */
+    const DataUser = (e)=>{
+        e.preventDefault()
+        const datosUsuario = {
+            name: nombre,
+            surname: apellido,
+            phone: telefono,
+            email: emailRef.current.value,
+            address: direccion,
+           }
+        const db = getFirestore();
+        const UserCollection = db.collection("Users");
+        UserCollection.get().then(async (value) => {
+            await Promise.all(
+                value.docs.map(async () => {
+         /* agrego un valor en cada item que es el id de su propio documento para que no se repitan los ids */
+                    UserCollection.doc(currentUser.uid).set(
+                        {...datosUsuario},
+                        {merge: true}
+                    )
+                })
+            );
+        });
+        setTimeout(() => {
+                    alert("datos guardados correctamente")
+                    window.location.reload();
+                  }, 2000);
+    }
+    useEffect(() => {
+        /* colcamoslos datos automaticamente enlosinput si el usuario está registrado */
+        const db = getFirestore();
+        const UserCollection = db.collection("Users");
+        UserCollection.get().then(async (value) => {
+          let Useraux = await Promise.all(
+            value.docs.map(async () => {
+              let userdoc = await UserCollection.doc(currentUser.uid).get()
+              return {...userdoc.data()}
+            })
+          )
+          Useraux.map((elem)=>{
+            setNombre(elem.name)
+            setApellido(elem.surname)
+            setDireccion(elem.address)
+            setTelefono(elem.phone)
+            return elem
+          })
+        });
+    
+      }, [currentUser,setNombre,setApellido,setDireccion,setTelefono])
     return (
         <div className="PerfilUsuario">
             <h1>Bienvenido {currentUser.email}</h1>
@@ -51,7 +99,30 @@ const PerfilUsuario = () => {
                 <input type="password" ref={confirmPassRef} placeholder="Confirmar contraseña"/>
                 <input disabled={loading} type="submit" value="Actualizar Perfil"/>
             </form>
+            <h3>Datos personales</h3>
+            <form onSubmit={(e)=>{DataUser(e)}}>
             <div>
+                <label htmlFor="nombre">Nombre:</label>
+                <input value={nombre} name="nombre" onChange={(e) => {setNombre(e.target.value)}}type="text" pattern="[a-zA-Z ]{2,254}"required/>
+              </div>
+              <div>
+                <label htmlFor="apellido">Apellido:</label>
+                <input value={apellido} name="apellido" onChange={(e) => {setApellido(e.target.value)}} type="text" pattern="[a-zA-Z ]{2,254}"required/>
+              </div>
+              <div>
+                <abbr title="Télefonos validos de Argentina">
+                  <label htmlFor="telefono">Teléfono:</label>
+                  {/* solo telefonos validos de Argentina */}
+                  <input value={telefono} name="telefono" onChange={(e) => {setTelefono(e.target.value)}} type="tel" pattern="^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}"required/>
+                </abbr>
+              </div>
+              <div>
+                <label htmlFor="direccion">Dirección:</label>
+                <input value={direccion} name="direccion" onChange={(e) => {setDireccion(e.target.value)}} type="text"required/>
+              </div>
+              {direccion && telefono && apellido && nombre ? <button type="submit">Guardar Datos</button> : <button type="submit" disabled>Guardar Datos</button>}
+            </form>
+             <div>
                 <Link className="a" to="/">Cancelar</Link>
             </div>
         </div>

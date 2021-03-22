@@ -7,8 +7,13 @@ export const useAuthContext = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
     const [currentUser,setCurrentUSer] = useState();
     const [loading,setLoading] = useState(true);
+    const [nombre, setNombre] = useState("");
+    const [apellido, setApellido] = useState("");
+    const [telefono, setTelefono] = useState("");
+    const [direccion, setDireccion] = useState("");
 
     const auth = getFirebase().auth();
+
     const signUp = async (email,password)=>{
       return await auth.createUserWithEmailAndPassword(email,password)
     }
@@ -27,9 +32,10 @@ export const AuthProvider = ({ children }) => {
     const updatePassword = async (password)=>{
         return await currentUser.updatePassword(password)
     }
-        const TwitterProvider = new firebase.auth.TwitterAuthProvider()
-        const FacebookProvider = new firebase.auth.FacebookAuthProvider()
-        const GoogleProvider = new firebase.auth.GoogleAuthProvider();
+
+    const TwitterProvider = new firebase.auth.TwitterAuthProvider()
+    const FacebookProvider = new firebase.auth.FacebookAuthProvider()
+    const GoogleProvider = new firebase.auth.GoogleAuthProvider();
         
     useEffect(() => {    
         const unsuscribe = auth.onAuthStateChanged(user =>{
@@ -48,7 +54,15 @@ export const AuthProvider = ({ children }) => {
         signUp,
         TwitterProvider,
         FacebookProvider,
-        GoogleProvider
+        GoogleProvider,
+        nombre,
+        setNombre,
+        apellido,
+        setApellido,
+        direccion,
+        setDireccion,
+        telefono,
+        setTelefono
     }
     return (
         <AuthContext.Provider value={value}>

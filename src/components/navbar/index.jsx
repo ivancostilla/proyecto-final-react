@@ -26,20 +26,20 @@ const NavBar = ()=> {
         useEffect(() => {    
         if(currentUser){
             setCurrentUseruid(currentUser.uid)
-            /* traigo un documento creadoen USers que contiene eluid para el administrador
+            /* traigo un documento creado en Admin que contiene el uid para el administrador
             en el html comparo el currentUser.uid y el documento que traigo de firebase
             si coinciden se muestra la pestaña Administrador en el navbar y si no no lo muestra,
             esta fue la unica solución que se me ocurrió para poder usar el adminpanel,
             desconozco cual es lamanera correcta de asignar roles de usuarios usando solo react y firebase */
-        const UsersCollection = db.collection("Users")
-        UsersCollection.get().then(async (value) => {
-             let aux = await Promise.all(
+        const AdminCollection = db.collection("Admin")
+        AdminCollection.get().then(async (value) => {
+            let aux = await Promise.all(
                 value.docs.map(async (elem) => {
-            return {uid: elem.data().uid}
-        })
-        );
-        setAdminUser(aux[0].uid)
-    });
+                    return {uid: elem.data().uid}
+                })
+            );
+            setAdminUser(aux[0].uid)
+        });
         }
     }, [db,currentUseruid,currentUser])
 

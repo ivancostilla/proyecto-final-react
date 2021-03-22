@@ -4,7 +4,7 @@ export const CartContext = createContext();
 export const useCartContext = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-  
+
   /* estado para ir guardando los productos que se agregan al carrito: */
   const [cart, setCart] = useState([]);
   /* estado para guardar la cantidad de elementos agregados al carrito:*/

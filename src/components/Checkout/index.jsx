@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
 import { getFirestore } from "../../firebase";
 import { useCartContext } from "../../context/CartContext";
+import { useAuthContext } from "../../context/AuthContext";
+
 import firebase from "firebase/app";
 import "./style.css";
 const Checkout = () => {
   const {precioTotal,cart,clearCart,totalCant,cantidadSeleccionadaPorUsuario,stockFirebase} = useCartContext();
+  const {currentUser} = useAuthContext()
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -76,6 +79,29 @@ const Checkout = () => {
       });
 
   };
+  useEffect(() => {
+    /* colcamoslos datos automaticamente enlosinput si el usuario está registrado */
+    if(currentUser){
+      const db = getFirestore();
+    const UserCollection = db.collection("Users");
+    UserCollection.get().then(async (value) => {
+      let Useraux = await Promise.all(
+        value.docs.map(async () => {
+          let userdoc = await UserCollection.doc(currentUser.uid).get()
+          return {...userdoc.data()}
+        })
+      )
+      Useraux.map((elem)=>{
+        setNombre(elem.name)
+        setApellido(elem.surname)
+        setDireccion(elem.address)
+        setTelefono(elem.phone)
+        setEmail(elem.email)
+        return elem
+      })
+    });}
+
+  }, [currentUser])
   return (
     <>
       {cantidadSeleccionadaPorUsuario > stockFirebase ?

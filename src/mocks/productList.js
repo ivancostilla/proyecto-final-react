@@ -16,19 +16,32 @@ const productList = [
 {category:"005",id:"42",name:"gorra",image:"images/gorra.jpg",description:"gorra con cierre ajustable",price:1000,stock:26,envio:"a todo el país",talle:'Único 38 a 44',color:'Negro',tela:'Liso',marca:'gorro',modelo:'5'},
 {category:"005",id:"43",name:"gorra",image:"images/gorra.jpg",description:"gorra con cierre ajustable",price:1250,stock:41,envio:"a todo el país",talle:'Único 38 a 44',color:'Negro',tela:'Liso',marca:'gorro',modelo:'5'}
 ];
-/*     const CategoriasCollection = db.collection("Categorias");
-    CategoriasCollection.get().then(async (value) => {
-      let nombreCategoria = await Promise.all(
-        value.docs.map(async (element) => {
-          let auxcategoria = await CategoriasCollection.doc(element.id).get();
-          return auxcategoria.data().nombre
-        })
-      );
-      nombreCategoria.map(catnom =>{  
-        if(catnom === categoria){
-            console.log("la categoria es:" + catnom)
+ /* consumiendo apis clase 7: */
+  /* useEffect(()=>{
+fetch("https://api.mercadolibre.com/products/search?status=active&site_id=MLA&q=Samsung&limit=5000")
+.then(result => {
+    return result.json()
+}).then(value => {
+    //Guardamos en un state
+    console.log(value);
+}).catch(error => {
+    console.log(error);
+})
+return () => {}
+},[]) */
+  /* fin clase 7 */
+//parametro es un valor que se le pasa a una funcion
+//un callback es una funcion que se ejecuta cuando algo pasó,
+//es un evento que ejecuta el componente y le evuelve el valor al padre
 
-            }
-      }) 
-    });*/
+//componentes de presentacion: generalmente son elementos como botones o inputs
+//que no tienen una funcionalidad logca, no matan componentes, etc, por ej: ButtonComponent
+
+/* componentes contenedores: son contrarios a los depresentacion, contienen la logica de la web
+y contienen a muchos contenedores hijos, que son de presentacion */
+
+//consultas a base de datos siempre van adentro de useEffect, con async await y promesas
+
+//las keys se usan solo cuando usamos .map en los componentes
+
 export default productList;

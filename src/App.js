@@ -18,19 +18,6 @@ import SignUp from "./components/SignUp";
 import PerfilUsuario from "./components/PerfilUsuario";
 import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./components/ForgotPassword";
-//parametro es un valor que se le pasa a una funcion
-//un callback es una funcion que se ejecuta cuando algo pasó,
-//es un evento que ejecuta el componente y le evuelve el valor al padre
-
-//componentes de presentacion: generalmente son elementos como botones o inputs
-//que no tienen una funcionalidad logca, no matan componentes, etc, por ej: ButtonComponent
-
-/* componentes contenedores: son contrarios a los depresentacion, contienen la logica de la web
-y contienen a muchos contenedores hijos, que son de presentacion */
-
-//consultas a base de datos siempre van adentro de useEffect, con async await y promesas
-
-//las keys se usan solo cuando usamos .map en los componentes
 
 const App = () => {
   return (

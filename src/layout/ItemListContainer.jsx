@@ -3,23 +3,8 @@ import "./style.css";
 import ItemList from "../components/ItemList";
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../firebase";
-/* to do:pasarela de pagos ml */
 const ItemListContainer = () => {
-  /* consumiendo apis clase 7: */
-  /* useEffect(()=>{
-fetch("https://api.mercadolibre.com/products/search?status=active&site_id=MLA&q=Samsung&limit=5000")
-.then(result => {
-    return result.json()
-}).then(value => {
-    //Guardamos en un state
-    console.log(value);
-}).catch(error => {
-    console.log(error);
-})
-return () => {}
-},[]) */
-  /* fin clase 7 */
-
+ 
   /* loading */
   const [loading, setLoading] = useState(true);
   /* useState: lo uso para guardar los productos traidos con useEffect */

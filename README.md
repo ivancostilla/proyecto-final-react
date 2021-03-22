@@ -1,4 +1,8 @@
-Por ahora solo me enfoqué en aplicar lo aprendido en clases, aun no decidí que tipo de ecommerce quiero hacer para el proyecto final, pero si tengo unas cuantas ideas de lo que quiero aplicar dentro del proyecto.
+Proyecto finalcreado para el curso de React de CoderHouse.
+
+Cuenta administrador= -email: admin@admin.com
+                      -contraseña: 123456
+
 
 # Getting Started with Create React App
 

@@ -1,5 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+/* por alguna razon github me dejaba el nombre navbar en minuscula,lo cual hacia que no pudiera deployar en netlify
+asi que lo deje enminuscula nomas*/
 import NavBar from "./components/navbar";
 import ProductNav from "./components/ProductNav";
 import Checkout from "./components/Checkout";

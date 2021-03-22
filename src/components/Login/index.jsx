@@ -7,7 +7,7 @@ import "./style.css"
 const Login = () => {
     const emailRef= useRef();
     const passRef= useRef();
-    const {login,FacebookProvider,TwitterProvider,GoogleProvider} = useAuthContext();
+    const {login,TwitterProvider,GoogleProvider} = useAuthContext();
     const [error,setError]= useState("")
     const [loading,setLoading]= useState(false)
     const history = useHistory()
@@ -49,7 +49,6 @@ const Login = () => {
             </form>
             <p>Iniciar sesión con:</p>
             <button onClick={()=>{handleProvider(GoogleProvider)}}>Google</button>
-            <button onClick={()=>{handleProvider(FacebookProvider)}}>Facebook</button>
             <button onClick={()=>{handleProvider(TwitterProvider)}}>Twitter</button>
             
             <div>

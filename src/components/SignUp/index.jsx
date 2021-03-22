@@ -8,7 +8,7 @@ const SignUp = () => {
     const emailRef= useRef();
     const passRef= useRef();
     const confirmPassRef= useRef();
-    const {signUp,FacebookProvider,TwitterProvider,GoogleProvider} = useAuthContext();
+    const {signUp,TwitterProvider,GoogleProvider} = useAuthContext();
     const [error,setError]= useState("")
     const [loading,setLoading]= useState(false)
     const history = useHistory()
@@ -58,7 +58,6 @@ const SignUp = () => {
             </form>
             <p>Registrarse con:</p>
             <button onClick={()=>{handleProvider(GoogleProvider)}}>Google</button>
-            <button onClick={()=>{handleProvider(FacebookProvider)}}>Facebook</button>
             <button onClick={()=>{handleProvider(TwitterProvider)}}>Twitter</button>
             <div>
                 <p>Ya tienes una cuenta? <Link className="a" to="/ingresar">Ingresar</Link></p>

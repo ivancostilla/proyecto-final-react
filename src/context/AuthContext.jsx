@@ -33,8 +33,7 @@ export const AuthProvider = ({ children }) => {
         return await currentUser.updatePassword(password)
     }
 
-    const TwitterProvider = new firebase.auth.TwitterAuthProvider()
-    const FacebookProvider = new firebase.auth.FacebookAuthProvider()
+    const TwitterProvider = new firebase.auth.TwitterAuthProvider();
     const GoogleProvider = new firebase.auth.GoogleAuthProvider();
         
     useEffect(() => {    
@@ -53,7 +52,6 @@ export const AuthProvider = ({ children }) => {
         login,
         signUp,
         TwitterProvider,
-        FacebookProvider,
         GoogleProvider,
         nombre,
         setNombre,

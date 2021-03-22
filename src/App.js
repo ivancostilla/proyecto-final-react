@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/navbar";
 import ProductNav from "./components/ProductNav";
 import Checkout from "./components/Checkout";
 import CartContainer from "./layout/CartContainer";
